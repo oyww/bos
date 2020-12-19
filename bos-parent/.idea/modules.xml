@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bos-manager-web/bos-manager-web.iml" filepath="$PROJECT_DIR$/bos-manager-web/bos-manager-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bos-manager/bos.manager.iml" filepath="$PROJECT_DIR$/bos-manager/bos.manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bos.parent.iml" filepath="$PROJECT_DIR$/bos.parent.iml" />
+    </modules>
+  </component>
+</project>

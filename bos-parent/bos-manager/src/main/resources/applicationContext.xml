@@ -4,12 +4,15 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context.xsd
 						http://www.springframework.org/schema/aop
 						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://code.alibabatech.com/schema/dubbo
+						http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 						http://www.springframework.org/schema/tx
 						http://www.springframework.org/schema/tx/spring-tx.xsd">
 
@@ -54,12 +57,22 @@
     </bean>
 
     <!--组件扫描-->
-    <context:component-scan base-package="com.oyww.bos"/>
+    <context:component-scan base-package="com.oyww.bos.service"/>
 
     <!--开启注解解析器，可以省略-->
     <!--<context:annotation-config></context:annotation-config>-->
 
     <!--开启事务注解-->
     <tx:annotation-driven></tx:annotation-driven>
+    <!-- 使用dubbo发布服务 -->
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="bos-manager" />
+    <dubbo:registry protocol="zookeeper"
+                    address="192.168.1.180:2181" />
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20880" />
+    <!-- 声明需要暴露的服务接口 ,设置超时时间以免调试时超时报错-->
+    <!-- 发布商品服务 -->
+    <dubbo:service interface="com.oyww.bos.service.TestService" ref="testServiceImpl" timeout="600000"/>
 
 </beans>

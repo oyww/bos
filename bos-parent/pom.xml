@@ -7,6 +7,10 @@
     <groupId>com.oyww.bos</groupId>
     <artifactId>bos.parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>bos-manager</module>
+        <module>bos-manager-web</module>
+    </modules>
     <packaging>pom</packaging>
 
 
