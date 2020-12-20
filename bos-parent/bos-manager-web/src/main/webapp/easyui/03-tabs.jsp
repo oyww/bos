@@ -65,7 +65,7 @@
 	<!-- 制作tabs选项卡面板 -->
 		<div id="tabs1" class="easyui-tabs" data-options="fit:true">
 			<!-- 使用子div表示每个面板 -->
-			<div data-options="iconCls:'icon-save'" title="面板1">111</div>
+			<div data-options="iconCls:'icon-save',content:'文本区域支持html标签<a href=\'#\'>点击</a>'" title="面板1" >111</div>
 			<div data-options="iconCls:'icon-edit',closable:true" title="面板2">222222</div>
 			<div data-options="iconCls:'icon-cut'" title="面板3">333333</div>
 			<div data-options="iconCls:'icon-back'" title="面板4">44444</div>

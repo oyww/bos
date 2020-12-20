@@ -40,15 +40,29 @@
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/bos</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
             </props>
         </property>
 
         <!-- hibernate映射文件-->
         <property name="mappingDirectoryLocations">
             <list>
-                <!-- <value>classpath:com/gyf/bos/model</value>-->
+                 <!--<value>classpath:com/oyww/bos/model</value>-->
             </list>
         </property>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+
+    <!--配置hibernate模板，不用id自动注入可以根据class类型注入-->
+    <bean class="org.springframework.orm.hibernate5.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <!--事务管理器-->
@@ -57,13 +71,32 @@
     </bean>
 
     <!--组件扫描-->
-    <context:component-scan base-package="com.oyww.bos.service"/>
+    <context:component-scan base-package="com.oyww.bos.*"/>
 
     <!--开启注解解析器，可以省略-->
-    <!--<context:annotation-config></context:annotation-config>-->
+    <context:annotation-config/>
 
     <!--开启事务注解-->
-    <tx:annotation-driven></tx:annotation-driven>
+    <tx:annotation-driven/>
+
+
+   <!-- <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="read*" read-only="true" />
+            <tx:method name="list*" read-only="true" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="modify*" propagation="REQUIRED" />
+            <tx:method name="*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut expression="execution(* com.oyww.bos..*(..))"
+                      id="busPointcut" />
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="busPointcut" />
+    </aop:config>-->
+
+
     <!-- 使用dubbo发布服务 -->
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="bos-manager" />

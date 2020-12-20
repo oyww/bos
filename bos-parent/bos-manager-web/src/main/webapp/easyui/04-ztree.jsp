@@ -117,20 +117,24 @@
 				},
 				callback: {
 					onClick: function(event, treeId, treeNode){
+					    //通过判断有没有page属性或者是否是父节点确定是否执行添加tab操作
 						if(treeNode.page!=undefined){
-							//返回#tabs1在面板选项卡中是否存在的布尔值
-						var exist=$("#tabs1").tabs("exists",treeNode.name);	
-						if(!exist){
-								$("#tabs1").tabs("add",{
-								title : treeNode.name,
-								iconCls : 'icon-edit',
-								closable : true,//是否可以关闭
-								/* 创建面板后新建一个iframe在里面打开链接src */
-								content : '<iframe frameborder="0" height="100%" width="100%" src="'+treeNode.page+'"></iframe>'
-							});
-						}else{
-							$("#tabs1").tabs("select",treeNode.name);
-						}
+						    if(!treeNode.isParent){
+						        console.info('not parent')
+							}
+								//返回#tabs1在面板选项卡中是否存在的布尔值
+							var exist=$("#tabs1").tabs("exists",treeNode.name);
+							if(!exist){
+									$("#tabs1").tabs("add",{
+									title : treeNode.name,
+									iconCls : 'icon-edit',
+									closable : true,//是否可以关闭
+									/* 创建面板后新建一个iframe在里面打开链接src */
+									content : '<iframe frameborder="0" height="100%" width="100%" src="'+treeNode.page+'"></iframe>'
+								});
+							}else{
+								$("#tabs1").tabs("select",treeNode.name);
+							}
 						
 						
 						}
@@ -140,7 +144,7 @@
 			};
 				var url="${pageContext.request.contextPath}/json/menu.json";
 				$.get(url,{},function(data){
-				$.fn.zTree.init($("#ztree3"), setting3, data);	
+					$.fn.zTree.init($("#ztree3"), setting3, data);
 				},"json");
 				
 			});
@@ -157,10 +161,10 @@
 										function() {
 											//判断是否存在，返回值Boolean
 											var exist = $("#tabs1").tabs(
-													"exists", '面板4');
+													"exists", '面板5');
 											if (exist) {
 												$("#tabs1").tabs("select",
-														'面板4');
+														'面板5');
 											} else {
 
 												//调用tabs的add方法动态添加选项卡
@@ -168,7 +172,7 @@
 														.tabs(
 																"add",
 																{
-																	title : '面板4',
+																	title : '面板5',
 																	iconCls : 'icon-edit',
 																	closable : true,
 																	content : '<iframe frameborder="0" height="100%" width="100%" src="https://www.baidu.com"></iframe>'
